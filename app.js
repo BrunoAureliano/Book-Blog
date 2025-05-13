@@ -10,8 +10,6 @@ import dotenv from "dotenv"
 import bodyParser from "body-parser"
 
 const app = express()
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
 
 dotenv.config()
 
@@ -32,6 +30,12 @@ dotenv.config()
     app.engine('handlebars', handlebars.engine)
     app.set('view engine', 'handlebars')
 
+    // Public
+    const __filename = fileURLToPath(import.meta.url)
+    const __dirname = path.dirname(__filename)
+    
+    app.use(express.static(path.join(__dirname, 'public')))
+
     // Mongoose
     try {
         await mongoose.connect(process.env.MONGO_URI)
@@ -40,9 +44,12 @@ dotenv.config()
         console.log(`Erro ao conectar com o Mongo! ${err}`)
     }
 
+app.get('/', async (req, res) => {
+    try {
+        res.render('index')
+    } catch (err) {
 
-app.get('/', (req, res) => {
-    res.send('homepage')
+    }
 })
 
 app.listen(8080, () => {
