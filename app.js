@@ -9,6 +9,9 @@ import passport from "passport"
 import dotenv from "dotenv"
 import bodyParser from "body-parser"
 
+import user from './routes/user.js'
+import admin from './routes/admin.js'
+
 const app = express()
 
 dotenv.config()
@@ -33,7 +36,7 @@ dotenv.config()
     // Public
     const __filename = fileURLToPath(import.meta.url)
     const __dirname = path.dirname(__filename)
-    
+
     app.use(express.static(path.join(__dirname, 'public')))
 
     // Mongoose
@@ -44,9 +47,15 @@ dotenv.config()
         console.log(`Erro ao conectar com o Mongo! ${err}`)
     }
 
+
+// Rotas
+app.use('/user', user)
+app.use('/admin', admin)
+
+
 app.get('/', async (req, res) => {
     try {
-        res.render('index')
+        // Página de Cadastro e Login
     } catch (err) {
 
     }

@@ -5,6 +5,10 @@ const livrosSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    slug: {
+        type: String,
+        required: true
+    },
     autor: {
         type: String,
         required: true
