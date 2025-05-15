@@ -4,7 +4,7 @@ const router = express.Router()
 // Painel Inicial de Admin
     router.get('/', async (req, res) => {
         try {
-            // Página inicial do admin
+            res.send('Página inicial do admin')
         } catch (err) {
 
         }
@@ -13,7 +13,7 @@ const router = express.Router()
 // Rotas de Manutenção de Categorias
     router.get('/categorias', async (req, res) => {
         try {
-            // Página de categorias listadas
+            res.send('Página de categorias listadas')
         } catch (err) {
 
         }
@@ -21,7 +21,7 @@ const router = express.Router()
 
     router.get('/categorias/add', async (req, res) => {
         try {
-            // Página de add categorias novas
+            res.send('Página de add categorias novas')
             // [router.post]
         } catch (err) {
 
@@ -30,7 +30,7 @@ const router = express.Router()
 
     router.get('/categorias/edit', async (req, res) => {
         try {
-            // Página de edit categorias
+            res.send('Página de edit categorias')
             // [router.post]
         } catch (err) {
 
@@ -49,7 +49,7 @@ const router = express.Router()
 // Rotas de Manutenção de Usuários
     router.get('/usuarios', async (req, res) => {
         try {
-            // Rota de listagem dos usuários
+            res.send('Rota de listagem dos usuários')
         } catch (err) {
 
         }
@@ -57,7 +57,7 @@ const router = express.Router()
 
     router.get('/usuarios/add', async (req, res) => {
         try {
-            // Rota para adicionar usuário manualmente
+            res.send('Rota para adicionar usuário manualmente')
             // [router.post]
         } catch (err) {
 
@@ -66,7 +66,7 @@ const router = express.Router()
 
     router.get('/usuarios/edit', async (req, res) => {
         try {
-            // Rota para editar usuários (permissões)
+             res.send('Rota para editar usuários (permissões)')
             // [router.post]
         } catch (err) {
 

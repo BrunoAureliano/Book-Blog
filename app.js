@@ -52,10 +52,19 @@ dotenv.config()
 app.use('/user', user)
 app.use('/admin', admin)
 
-
+// Página de Cadastro
 app.get('/', async (req, res) => {
     try {
-        // Página de Cadastro e Login
+        res.render('index')
+    } catch (err) {
+
+    }
+})
+
+// Página de Login
+app.get('/login', async (req, res) => {
+    try {
+        res.render('login')
     } catch (err) {
 
     }
