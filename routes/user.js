@@ -5,6 +5,11 @@ import mongoose from 'mongoose'
 import '../models/Usuarios.js'
 const Usuario = mongoose.model('usuarios')
 
+// Regex's
+const nomeRegex = /^[A-Za-zÀ-ÖØ-Ýà-öø-ÿ\s]+$/
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+const senhaRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%*])[A-Za-z\d!@#$%*]{8,20}$/
+
 
 // Página de Cadastro
 router.get('/cadastro', (req, res) => {
@@ -12,6 +17,24 @@ router.get('/cadastro', (req, res) => {
 })
 
 router.post('/cadastro', async (req, res) => {
+    let erros = []
+
+    if(!nomeRegex.test(req.body.nome) || !req.body.nome) {
+        erros.push({ text: 'Nome Inválido! Tente novamente!' })
+    }
+
+    if(!emailRegex.test(req.body.email) || !req.body.email) {
+        erros.push({ text: 'Email Inválido! Tente novamente!' })
+    }
+
+    if(!senhaRegex.test(req.body.senha) || !req.body.senha) {
+        erros.push({ text: 'Senha Inválida! Tente novamente!'})
+    }
+
+    if(erros.length > 0) {
+        return res.render('user/cadastro', {erros: erros})
+    }
+    
     try {
         const usuario = await Usuario.findOne({ email: req.body.email })
         if (usuario) {

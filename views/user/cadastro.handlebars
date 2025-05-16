@@ -1,25 +1,37 @@
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <form class="p-4 shadow rounded bg-white" style="max-width: 500px; width: 100%;" action="" method="post">
-        <h2 class="text-center mb-4">Página de Cadastro</h2>
-        <div class="form-group mt-2">
-            <label for="nome" class="fs-5">Nome Completo</label>
-                <input type="text" class="form-control mt-2" name="nome" required>
-            <div id="nameHelper" class="form-text">Ex: Adriano Henrique Pinto</div>
-        </div>
-        <div class="form-group mt-2">
-            <label for="email" class="fs-5">Email</label>
-                <input type="email" class="form-control mt-2" name="email" required>
-            <div id="emailHelper" class="form-text">Ex: abcd@email.com</div>
-        </div>
-        <div class="form-group mt-2">
-            <label for="senha" class="fs-5">Senha</label>
-                <input type="password" class="form-control" name="senha" required>
-            <div id="passwordHelper" class="form-text">Sua senha deve ter de 8-20 caracteres, conter pelo menos uma letra maiúscula, um número e um símbolo: !@#$%*</div>
-        </div>
-        <button type="submit" class="btn btn-success mt-4 w-100">Cadastrar</button>
-        <br>
-        <div class="form-text mt-3 text-center">
-            Já possuí um cadastro? Faça login clicando <a href="/user/login">aqui</a>!
-        </div>
+<body class="bg-light">
+  <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+    <!-- Mensagens de Erro -->
+    {{#each erros}}
+      <div class="alert alert-danger w-100" style="max-width: 500px;">{{text}}</div>
+    {{/each}}
+
+    <!-- Formulário -->
+    <form class="p-4 shadow rounded bg-white w-100" style="max-width: 500px;" action="" method="post">
+      <h2 class="text-center mb-4">Página de Cadastro</h2>
+
+      <div class="form-group mt-2">
+        <label for="nome" class="fs-5">Nome Completo</label>
+        <input type="text" class="form-control mt-2" name="nome" required>
+        <div id="nameHelper" class="form-text">Ex: Adriano Henrique Pinto</div>
+      </div>
+
+      <div class="form-group mt-2">
+        <label for="email" class="fs-5">Email</label>
+        <input type="email" class="form-control mt-2" name="email" required>
+        <div id="emailHelper" class="form-text">Ex: abcd@email.com</div>
+      </div>
+
+      <div class="form-group mt-2">
+        <label for="senha" class="fs-5">Senha</label>
+        <input type="password" class="form-control" name="senha" required>
+        <div id="passwordHelper" class="form-text">Sua senha deve ter de 8-20 caracteres, conter pelo menos uma letra maiúscula, um número e um símbolo: !@#$%*</div>
+      </div>
+
+      <button type="submit" class="btn btn-primary w-100 mt-4">Cadastrar</button>
+
+      <div class="form-text mt-3 text-center">
+        Já possuí um cadastro? Faça login clicando <a href="/user/login">aqui</a>!
+      </div>
     </form>
+  </div>
 </body>
