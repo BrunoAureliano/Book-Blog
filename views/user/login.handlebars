@@ -1,14 +1,17 @@
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <form class="p-4 shadow rounded bg-white" style="max-width: 500px; width: 100%;" action="/user" method="">
+    {{#if error}}
+        <div class="alert alert-danger text-center">{{error}}</div>
+    {{/if}}
+    <form class="p-4 shadow rounded bg-white" style="max-width: 500px; width: 100%;" action="" method="post">
         <h2 class="text-center mb-4">Página de Login</h2>
         <div class="form-group mt-2">
             <label for="email" class="fs-5">Email</label>
-            <input type="email" class="form-control mt-2" id="email" required>
+            <input type="email" class="form-control mt-2" id="email" name="email" required>
             <div id="emailHelper" class="form-text">Ex: abcd@email.com</div>
         </div>
         <div class="form-group mt-2">
             <label for="password" class="fs-5">Senha</label>
-            <input type="password" class="form-control" id="password" required>
+            <input type="password" class="form-control" id="password" name="senha" required>
             <div id="passwordHelper" class="form-text">Sua senha deve ter de 8-20 caracteres, conter pelo menos uma letra maiúscula, um número e um símbolo: !@#$%*</div>
         </div>
         <button type="submit" class="btn btn-primary w-100 mt-4">Login</button>
