@@ -1,6 +1,11 @@
 import express from 'express'
 const router = express.Router()
 
+import mongoose from 'mongoose'
+
+import '../models/Categorias.js'
+const Categoria = mongoose.model('categorias')
+
 // Painel Inicial de Admin
     router.get('/', async (req, res) => {
         try {
@@ -13,22 +18,35 @@ const router = express.Router()
 // Rotas de Manutenção de Categorias
     router.get('/categorias', async (req, res) => {
         try {
-            res.send('Página de categorias listadas')
+            const categorias = await Categoria.find()
+            res.render('admin/categorias', { categorias: categorias})
         } catch (err) {
-
+            req.flash('error_msg', 'Ocorreu um erro ao listar as categorias!')
+            res.redirect('/admin')
         }
     })
 
-    router.get('/categorias/add', async (req, res) => {
+    router.get('/categorias/add', (req, res) => {
+        res.render('admin/addcategorias')
+    })
+
+    router.post('/categorias/new', async (req, res) => {
         try {
-            res.send('Página de add categorias novas')
-            // [router.post]
-        } catch (err) {
+            const novaCategoria = {
+                nome: req.body.nome,
+                slug: req.body.slug
+            } 
 
+            const categoria = await new Categoria(novaCategoria).save()
+            req.flash('success_msg', 'Categoria criada com sucesso')
+            res.redirect('/admin/categorias')
+        } catch (err) {
+            req.flash('error_msg', 'Ocorreu um erro ao criar uma nova categoria. Tente novamente!')
+            res.redirect('/admin')
         }
     })
 
-    router.get('/categorias/edit', async (req, res) => {
+    router.get('/categorias/edit/:id', async (req, res) => {
         try {
             res.send('Página de edit categorias')
             // [router.post]
@@ -46,39 +64,5 @@ const router = express.Router()
     })
 
 
-// Rotas de Manutenção de Usuários
-    router.get('/usuarios', async (req, res) => {
-        try {
-            res.send('Rota de listagem dos usuários')
-        } catch (err) {
-
-        }
-    })
-
-    router.get('/usuarios/add', async (req, res) => {
-        try {
-            res.send('Rota para adicionar usuário manualmente')
-            // [router.post]
-        } catch (err) {
-
-        }
-    })
-
-    router.get('/usuarios/edit', async (req, res) => {
-        try {
-             res.send('Rota para editar usuários (permissões)')
-            // [router.post]
-        } catch (err) {
-
-        }
-    })
-
-    router.post('/usuarios/delete', async (req, res) => {
-        try {
-            // Rota para deletar um usuário
-        } catch (err) {
-
-        }
-    })
 
 export default router
