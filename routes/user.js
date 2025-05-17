@@ -72,7 +72,6 @@ router.post('/login', (req, res, next) => {
         successRedirect: '/user/homepage',
         failureRedirect: '/user/login',
         failureFlash: true,
-        successFlash: 'Login realizado com sucesso!'
     })(req, res, next)
 })
 
