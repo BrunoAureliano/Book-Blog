@@ -10,6 +10,8 @@
 
     import passport from 'passport'
 
+    import logado from '../helpers/isUser.js'
+
 // Regex's
     const nomeRegex = /^[A-Za-zÀ-ÖØ-Ýà-öø-ÿ\s]+$/
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
@@ -75,8 +77,19 @@ router.post('/login', (req, res, next) => {
     })(req, res, next)
 })
 
+// Rota de Logout
+router.get('/logout', logado, (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err)
+        }
+        req.flash('success_msg', 'Logout com sucesso!')
+        res.redirect('/')
+    })
+})
+
 // Painel inicial do Usuário
-    router.get('/homepage', async (req, res) => {
+    router.get('/homepage', logado, async (req, res) => {
         try {
             res.render('user/homepage')
         } catch (err) {
@@ -84,7 +97,7 @@ router.post('/login', (req, res, next) => {
         }
     })
 
-    router.get('/addpostagem', async (req, res) => {
+    router.get('/addpostagem', logado, async (req, res) => {
         try {
             res.send('Página de criação da resenha')
             // [router.post]
@@ -93,7 +106,7 @@ router.post('/login', (req, res, next) => {
         }
     })
 
-    router.get('/:slug', async (req, res) => {
+    router.get('/:slug', logado, async (req, res) => {
         try {
             res.send('Página de Ler Mais da resenha selecionada')
         } catch (err) {
