@@ -1,11 +1,14 @@
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div class="p-4 shadow rounded bg-white text-center" style="max-width: 600px; width: 100%;">
-        <h1 class="mb-4">📚 Bem-vindo ao Blog de Livros!</h1>
-        <p class="fs-5">Descubra novas histórias, compartilhe suas opiniões e encontre leitores como você.</p>
-        <p class="fs-6 text-muted">Aqui você pode ver e publicar resenhas sobre os livros que leu.</p>
-        <div class="d-flex flex-column gap-2 mt-4">
-            <a href="/user/login" class="btn btn-primary w-100">Entrar</a>
-            <a href="/user/cadastro" class="btn btn-outline-primary w-100">Cadastrar-se</a>
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <div class="w-100" style="max-width: 600px;">{{>_msg}}</div>
+        <div class="p-4 shadow rounded bg-white text-center" style="max-width: 600px; width: 100%;">
+            <h1 class="mb-4">📚 Bem-vindo ao Blog de Livros!</h1>
+            <p class="fs-5">Descubra novas histórias, compartilhe suas opiniões e encontre leitores como você.</p>
+            <p class="fs-6 text-muted">Aqui você pode ver e publicar resenhas sobre os livros que leu.</p>
+            <div class="d-flex flex-column gap-2 mt-4">
+                <a href="/user/login" class="btn btn-primary w-100">Entrar</a>
+                <a href="/user/cadastro" class="btn btn-outline-primary w-100">Cadastrar-se</a>
+            </div>
         </div>
     </div>
 </body>

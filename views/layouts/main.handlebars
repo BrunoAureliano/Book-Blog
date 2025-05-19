@@ -8,7 +8,10 @@
 </head>
 <body>
     {{>_navbar}}
-    {{>_msg}}
+    {{#if user}}
+        {{>_msg}}
+    {{else}}
+    {{/if}}
     {{{body}}}
     
 </body>
