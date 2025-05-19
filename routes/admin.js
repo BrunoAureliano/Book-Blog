@@ -6,6 +6,8 @@ import mongoose from 'mongoose'
 import '../models/Categorias.js'
 const Categoria = mongoose.model('categorias')
 
+import isAdmin from '../helpers/isAdmin.js'
+
 // Painel Inicial de Admin
     router.get('/', (req, res) => {
         res.render('admin/homepage')
@@ -13,7 +15,7 @@ const Categoria = mongoose.model('categorias')
 
 // Rotas de Manutenção de Categorias
     // Listagem de Categorias
-        router.get('/categorias', async (req, res) => {
+        router.get('/categorias', isAdmin, async (req, res) => {
             try {
                 const categorias = await Categoria.find()
                 res.render('admin/categorias', { categorias: categorias})
@@ -24,11 +26,11 @@ const Categoria = mongoose.model('categorias')
         })
 
     // Adição de Categorias
-        router.get('/categorias/add', (req, res) => {
+        router.get('/categorias/add', isAdmin, (req, res) => {
             res.render('admin/addcategorias')
         })
 
-        router.post('/categorias/new', async (req, res) => {
+        router.post('/categorias/new', isAdmin, async (req, res) => {
             try {
                 const novaCategoria = {
                     nome: req.body.nome,
@@ -45,7 +47,7 @@ const Categoria = mongoose.model('categorias')
         })
 
     //Edição de Categorias
-        router.get('/categorias/edit/:id', async (req, res) => {
+        router.get('/categorias/edit/:id', isAdmin, async (req, res) => {
             try {
                 const categoria = await Categoria.findOne({ _id: req.params.id })
                 res.render('admin/editcategorias', { categoria: categoria})
@@ -55,7 +57,7 @@ const Categoria = mongoose.model('categorias')
             }
         })
 
-        router.post('/categorias/edit', async (req, res) => {
+        router.post('/categorias/edit', isAdmin, async (req, res) => {
             try {
                 const categoria = await Categoria.findOne({ _id: req.body.id })
 
@@ -72,7 +74,7 @@ const Categoria = mongoose.model('categorias')
         })
 
     // Deleção de Categorias
-        router.post('/categorias/delete', async (req, res) => {
+        router.post('/categorias/delete', isAdmin, async (req, res) => {
             try {
                 await Categoria.deleteOne({ _id: req.body.id })
                 req.flash('success_msg', 'Categoria deletada com sucesso!')
