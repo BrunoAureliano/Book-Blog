@@ -7,53 +7,69 @@ import '../models/Categorias.js'
 const Categoria = mongoose.model('categorias')
 
 // Painel Inicial de Admin
-    router.get('/', async (req, res) => {
-        try {
-            res.send('Página inicial do admin')
-        } catch (err) {
-
-        }
+    router.get('/', (req, res) => {
+        res.render('admin/homepage')
     })
 
 // Rotas de Manutenção de Categorias
-    router.get('/categorias', async (req, res) => {
-        try {
-            const categorias = await Categoria.find()
-            res.render('admin/categorias', { categorias: categorias})
-        } catch (err) {
-            req.flash('error_msg', 'Ocorreu um erro ao listar as categorias!')
-            res.redirect('/admin')
-        }
-    })
+    // Listagem de Categorias
+        router.get('/categorias', async (req, res) => {
+            try {
+                const categorias = await Categoria.find()
+                res.render('admin/categorias', { categorias: categorias})
+            } catch (err) {
+                req.flash('error_msg', 'Ocorreu um erro ao listar as categorias!')
+                res.redirect('/admin')
+            }
+        })
 
-    router.get('/categorias/add', (req, res) => {
-        res.render('admin/addcategorias')
-    })
+    // Adição de Categorias
+        router.get('/categorias/add', (req, res) => {
+            res.render('admin/addcategorias')
+        })
 
-    router.post('/categorias/new', async (req, res) => {
-        try {
-            const novaCategoria = {
-                nome: req.body.nome,
-                slug: req.body.slug
-            } 
+        router.post('/categorias/new', async (req, res) => {
+            try {
+                const novaCategoria = {
+                    nome: req.body.nome,
+                    slug: req.body.slug
+                } 
 
-            const categoria = await new Categoria(novaCategoria).save()
-            req.flash('success_msg', 'Categoria criada com sucesso')
-            res.redirect('/admin/categorias')
-        } catch (err) {
-            req.flash('error_msg', 'Ocorreu um erro ao criar uma nova categoria. Tente novamente!')
-            res.redirect('/admin')
-        }
-    })
+                const categoria = await new Categoria(novaCategoria).save()
+                req.flash('success_msg', 'Categoria criada com sucesso')
+                res.redirect('/admin/categorias')
+            } catch (err) {
+                req.flash('error_msg', 'Ocorreu um erro ao criar uma nova categoria. Tente novamente!')
+                res.redirect('/admin')
+            }
+        })
 
-    router.get('/categorias/edit/:id', async (req, res) => {
-        try {
-            res.send('Página de edit categorias')
-            // [router.post]
-        } catch (err) {
+    //Edição de Categorias
+        router.get('/categorias/edit/:id', async (req, res) => {
+            try {
+                const categoria = await Categoria.findOne({ _id: req.params.id })
+                res.render('admin/editcategorias', { categoria: categoria})
+            } catch (err) {
+                req.flash('error_msg', 'Esta categoria não existe!')
+                res.redirect('/admin/categorias')
+            }
+        })
 
-        }
-    })
+        router.post('/categorias/edit', async (req, res) => {
+            try {
+                const categoria = await Categoria.findOne({ _id: req.body.id })
+
+                categoria.nome = req.body.nome
+                categoria.slug = req.body.slug
+
+                await categoria.save()
+                req.flash('success_msg', 'Categoria editada com sucesso!')
+                res.redirect('/admin/categorias')
+            } catch (err) {
+                req.flash('error_msg', 'Ocorreu um erro ao editar a categoria. Tente novamente!')
+                res.redirect('/admin/categorias')
+            }
+        })
 
     router.post('/categorias/delete', async (req, res) => {
         try {
