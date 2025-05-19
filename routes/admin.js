@@ -71,13 +71,17 @@ const Categoria = mongoose.model('categorias')
             }
         })
 
-    router.post('/categorias/delete', async (req, res) => {
-        try {
-            // Rota de deleção de categorias
-        } catch (err) {
-
-        }
-    })
+    // Deleção de Categorias
+        router.post('/categorias/delete', async (req, res) => {
+            try {
+                await Categoria.deleteOne({ _id: req.body.id })
+                req.flash('success_msg', 'Categoria deletada com sucesso!')
+                res.redirect('/admin/categorias')
+            } catch (err) {
+                req.flash('error_msg', 'Ocorreu um erro ao deletar a categoria. Tente novamente!')
+                res.redirect('/admin/categorias')
+            }
+        })
 
 
 
