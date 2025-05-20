@@ -4,7 +4,11 @@
 
     import mongoose from 'mongoose'
     import '../models/Usuarios.js'
+    import '../models/Livros.js'
+    import '../models/Categorias.js'
     const Usuario = mongoose.model('usuarios')
+    const Livro = mongoose.model('livros')
+    const Categoria = mongoose.model('categorias')
 
     import bcrypt from 'bcryptjs'
 
@@ -91,19 +95,25 @@
 // Painel inicial do Usuário
     router.get('/homepage', logado, async (req, res) => {
         try {
-            res.render('user/homepage')
+            const livro = await Livro.find().lean().populate('categoria').sort({ publicado: 'desc' })
+            res.render('user/homepage', { livro: livro })
         } catch (err) {
-
+            req.flash('error_msg', 'Ocorreu um erro ao listar as resenhas dos livros!')
         }
     })
 
     router.get('/addpostagem', logado, async (req, res) => {
         try {
-            res.send('Página de criação da resenha')
-            // [router.post]
+            const categorias = await Categoria.find()
+            res.render('user/addresenha', { categorias: categorias })
         } catch (err) {
-
+            req.flash('error_msg', 'Ocorreu um erro ao carregar o formulário')
+            res.redirect('/user/homepage')
         }
+    })
+
+    router.post('/addpostagem/new', logado, async (req, res) => {
+
     })
 
     router.get('/:slug', logado, async (req, res) => {

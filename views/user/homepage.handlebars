@@ -1,1 +1,17 @@
-<h1>Página inicial do usuário</h1>
+<a href="/user/addpostagem">
+    <button class="btn btn-success">Nova Postagem</button>
+</a>
+
+<h2>Postagens Recentes</h2>
+{{#each livro}}
+    <div class="card mt-4">
+        <div class="card-body">
+            <h3>{{nome}}</h3>
+            <h6>Autor: {{autor}}</h6>
+            <small>Criada em: {{publicado}}</small>
+            <small>Categoria: {{categoria.nome}}</small>
+        </div>
+    </div>
+{{else}}
+    <h5>Sem postagens</h5>
+{{/each}}
