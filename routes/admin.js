@@ -9,7 +9,7 @@ const Categoria = mongoose.model('categorias')
 import isAdmin from '../helpers/isAdmin.js'
 
 // Painel Inicial de Admin
-    router.get('/', (req, res) => {
+    router.get('/', isAdmin, (req, res) => {
         res.render('admin/homepage')
     })
 

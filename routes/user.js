@@ -65,28 +65,28 @@
     })
 
 // Página de Login
-router.get('/login', (req, res) => {
-    res.render('user/login')
-})
+    router.get('/login', (req, res) => {
+        res.render('user/login')
+    })
 
-router.post('/login', (req, res, next) => {
-    passport.authenticate('local', {
-        successRedirect: '/user/homepage',
-        failureRedirect: '/user/login',
-        failureFlash: true,
-    })(req, res, next)
-})
+    router.post('/login', (req, res, next) => {
+        passport.authenticate('local', {
+            successRedirect: '/user/homepage',
+            failureRedirect: '/user/login',
+            failureFlash: true,
+        })(req, res, next)
+    })
 
 // Rota de Logout
-router.get('/logout', logado, (req, res, next) => {
-    req.logout((err) => {
-        if (err) {
-            return next(err)
-        }
-        req.flash('success_msg', 'Logout com sucesso!')
-        res.redirect('/')
+    router.get('/logout', logado, (req, res, next) => {
+        req.logout((err) => {
+            if (err) {
+                return next(err)
+            }
+            req.flash('success_msg', 'Logout com sucesso!')
+            res.redirect('/')
+        })
     })
-})
 
 // Painel inicial do Usuário
     router.get('/homepage', logado, async (req, res) => {
