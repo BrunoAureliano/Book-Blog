@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
 const livrosSchema = mongoose.Schema({
     nome: {
@@ -15,11 +15,16 @@ const livrosSchema = mongoose.Schema({
     },
     publicado: {
         type: Date,
-        required: true
+        default: Date.now()
     },
     resenha: {
         type: String,
         required: true
+    },
+    categoria: {
+        type: Schema.Types.ObjectId,
+        ref: 'categorias',
+        require: true
     }
 })
 

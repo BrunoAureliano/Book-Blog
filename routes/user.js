@@ -113,7 +113,23 @@
     })
 
     router.post('/addpostagem/new', logado, async (req, res) => {
+        try {
+            const categorias = await Categoria.find()
+            const novaResenha = {
+                nome: req.body.nome,
+                slug: req.body.slug,
+                autor: req.body.autor,
+                resenha: req.body.resenha,
+                categoria: req.body.categoria
+            }
 
+            await new Livro(novaResenha).save()
+            req.flash('success_msg', 'Resenha criada com sucesso')
+            res.redirect('/user/homepage')
+        } catch (err) {
+            req.flash('error_msg', 'Ocorreu um erro ao criar sua resenha')
+            res.redirect('/user/homepage')
+        }
     })
 
     router.get('/:slug', logado, async (req, res) => {
