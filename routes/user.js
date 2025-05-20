@@ -134,9 +134,16 @@
 
     router.get('/:slug', logado, async (req, res) => {
         try {
-            res.send('Página de Ler Mais da resenha selecionada')
+            const livro = await Livro.findOne({ slug: req.params.slug })
+            if (livro) {
+                res.render('user/resenha', { livro: livro })
+            } else {
+                req.flash('error_msg', 'Esta resenha não existe!')
+                res.redirect('/user/homepage')
+            }
         } catch (err) {
-
+            req.flash('error_msg', 'Ocorreu um erro interno', err)
+            res.redirect('/user/homepage')
         }
     })
 
