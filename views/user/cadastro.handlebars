@@ -10,7 +10,7 @@
       <h2 class="text-center mb-4">Página de Cadastro</h2>
 
       <div class="form-group mt-2">
-        <label for="nome" class="fs-5">Nome Completo</label>
+        <label for="nome" class="fs-5">Nome completo</label>
         <input type="text" class="form-control mt-2" name="nome" required>
         <div id="nameHelper" class="form-text">Ex: Adriano Henrique Pinto</div>
       </div>
@@ -21,10 +21,27 @@
         <div id="emailHelper" class="form-text">Ex: abcd@email.com</div>
       </div>
 
-      <div class="form-group mt-2">
+      <div class="form-group mt-2 position-relative">
         <label for="senha" class="fs-5">Senha</label>
-        <input type="password" class="form-control" name="senha" required>
-        <div id="passwordHelper" class="form-text">Sua senha deve ter de 8-20 caracteres, conter pelo menos uma letra maiúscula, um número e um símbolo: !@#$%*</div>
+        <div class="input-group mt-2">
+          <input type="password" class="form-control" name="senha" id="senha" required>
+          <button type="button" class="btn btn-outline-secondary" onclick="toggleSenha('senha', this)">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+        <div id="passwordHelper" class="form-text">
+          Sua senha deve ter de 8-20 caracteres, conter pelo menos uma letra maiúscula, um número e um símbolo: !@#$%*
+        </div>
+      </div>
+
+      <div class="form-group mt-2">
+        <label for="senha2" class="fs-5">Confirme sua senha</label>
+        <div class="input-group mt-2">
+          <input type="password" class="form-control" name="senha2" id="senha2" required>
+          <button type="button" class="btn btn-outline-secondary" onclick="toggleSenha('senha2', this)">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
       </div>
 
       <button type="submit" class="btn btn-primary w-100 mt-4">Cadastrar</button>

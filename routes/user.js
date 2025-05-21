@@ -42,6 +42,10 @@
             erros.push({ text: 'Senha Inválida! Tente novamente!'})
         }
 
+        if(req.body.senha != req.body.senha2) {
+            erros.push({ text: 'As senhas devem ser iguais! Tente novamente!' })
+        }
+
         if(erros.length > 0) {
             return res.render('user/cadastro', {erros: erros})
         }
