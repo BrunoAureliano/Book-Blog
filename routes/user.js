@@ -63,9 +63,16 @@
 
                 newUser.senha = hash
 
-                await new Usuario(newUser).save()
-                req.flash('success_msg', 'Usuário cadastrado com sucesso')
-                res.redirect('/user/homepage')
+                const usuarioSalvo = await new Usuario(newUser).save()
+
+                req.login(usuarioSalvo, (err) => {
+                    if (err) {
+                        req.flash('error_msg', 'Erro ao autenticar o usuário após o cadastro')
+                        res.redirect('/user/login')
+                    } 
+                    req.flash('success_msg', 'Usuário cadastrado com sucesso')
+                    res.redirect('/user/homepage')
+                })
             }
         } catch (err) {
             req.flash('error_msg', 'Ocorreu um erro ao cadastrar o usuário. Tente novamente!')
