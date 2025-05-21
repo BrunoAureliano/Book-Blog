@@ -16,7 +16,8 @@ export default function Passport(passport) {
                 return done(null, false, { message: 'Está conta não existe!' })
             }
 
-            if (senha === usuario.senha) {
+            const igual = await bcrypt.compare(senha, usuario.senha)
+            if (igual) {
                 return done(null, usuario)
             } else {
                 return done(null, false, { message: 'Senha Incorreta!'})

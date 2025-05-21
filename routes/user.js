@@ -58,6 +58,11 @@
                     senha: req.body.senha
                 }
 
+                const salt = await bcrypt.genSalt(10)
+                const hash = await bcrypt.hash(newUser.senha, salt)
+
+                newUser.senha = hash
+
                 await new Usuario(newUser).save()
                 req.flash('success_msg', 'Usuário cadastrado com sucesso')
                 res.redirect('/user/homepage')
