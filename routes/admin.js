@@ -4,7 +4,9 @@ const router = express.Router()
 import mongoose from 'mongoose'
 
 import '../models/Categorias.js'
+import '../models/Livros.js'
 const Categoria = mongoose.model('categorias')
+const Livro = mongoose.model('livros')
 
 import isAdmin from '../helpers/isAdmin.js'
 
@@ -85,6 +87,29 @@ import isAdmin from '../helpers/isAdmin.js'
             }
         })
 
+
+// Rotas de Manutenção de Postagens
+    // Listagem de Postagens
+        router.get('/resenhas', isAdmin, async (req, res) => {
+                try {
+                    const livro = await Livro.find().lean().populate('categoria').sort({ publicado: 'desc' })
+                    res.render('admin/resenhas', { livro: livro })
+                } catch (err) {
+                    req.flash('error_msg', 'Ocorreu um erro ao listar as resenhas dos livros!')
+                }
+            })
+    
+    // Deleção de Postagens
+        router.post('/resenhas/delete', isAdmin, async (req, res) => {
+            try {
+                await Livro.deleteOne({ _id: req.body.id })
+                req.flash('success_msg', 'Postagem deletada com sucesso!')
+                res.redirect('/admin/resenhas')
+            } catch (err) {
+                req.flash('error_msg', 'Ocorreu um erro ao deletar a postagem. Tente novamente!')
+                res.redirect('/admin/resenhas')
+            }
+        })
 
 
 export default router

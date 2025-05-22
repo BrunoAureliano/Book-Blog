@@ -1,0 +1,23 @@
+<h2>Postagens Recentes</h2>
+{{#each livro}}
+    <div class="card mt-4">
+        <div class="card-body">
+            <h3>{{nome}}</h3>
+            <h6>Autor: {{autor}}</h6>
+            <a href="/user/{{_id}}">
+                <button class="btn btn-success">Ler Mais</button>
+            </a>
+            
+            <form action="/admin/resenhas/delete" method="post">
+                <input type="hidden" name="id" value="{{_id}}">
+                <button type="submit" class="btn btn-danger mt-2">Deletar</button>
+            </form>
+            
+            <small>Criada em: {{publicado}}</small>
+            <br>
+            <small>Categoria: {{categoria.nome}}</small>
+        </div>
+    </div>
+{{else}}
+    <h5>Sem postagens</h5>
+{{/each}}
