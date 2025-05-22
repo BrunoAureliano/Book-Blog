@@ -148,9 +148,9 @@
         }
     })
 
-    router.get('/:slug', logado, async (req, res) => {
+    router.get('/:id', logado, async (req, res) => {
         try {
-            const livro = await Livro.findOne({ slug: req.params.slug })
+            const livro = await Livro.findOne({ _id: req.params.id })
             if (livro) {
                 res.render('user/resenha', { livro: livro })
             } else {
