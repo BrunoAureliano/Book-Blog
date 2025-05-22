@@ -118,6 +118,7 @@
         }
     })
 
+// Página de Adição de Postagem    
     router.get('/addpostagem', logado, async (req, res) => {
         try {
             const categorias = await Categoria.find()
@@ -148,7 +149,36 @@
         }
     })
 
-    router.get('/:id', logado, async (req, res) => {
+// Página de Categorias Existentes
+    router.get('/categorias', async (req, res) => {
+        try {
+            const categoria = await Categoria.find()
+            res.render('categorias/index', { categoria: categoria })
+        } catch (err) {
+            req.flash('error_msg', 'Ocorreu um erro ao listar as categorias!')
+            res.redirect('/user/homepage')
+        }
+    })
+
+// Página de Resenhas por Categoria
+    router.get('/categorias/:slug', async (req, res) => {
+        try {
+            const categoria = await Categoria.findOne({ slug: req.params.slug })
+            if (categoria) {
+                const livros = await Livro.find({ categoria: categoria._id })
+                res.render('categorias/resenhas', { livros: livros, categoria: categoria })
+            } else {
+                req.flash('error_msg', 'Esta categoria não existe')
+                res.redirect('/user/homepage')
+            }
+        } catch (err) {
+            req.flash('error_msg', 'Ocorreu um erro interno! Tente novamente!')
+            res.redirect('/user/homepage')
+        }
+    })
+
+// Página de 'Ler Mais'
+    router.get('/resenha/:id', logado, async (req, res) => {
         try {
             const livro = await Livro.findOne({ _id: req.params.id })
             if (livro) {
@@ -162,8 +192,6 @@
             res.redirect('/user/homepage')
         }
     })
-
-
 
 
 export default router

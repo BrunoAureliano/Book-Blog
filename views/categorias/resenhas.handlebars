@@ -1,9 +1,5 @@
-<a href="/user/addpostagem">
-    <button class="btn btn-success">Nova Postagem</button>
-</a>
-
-<h2>Postagens Recentes</h2>
-{{#each livro}}
+<h1>{{categoria.nome}}</h1>
+{{#each livros}}
     <div class="card mt-4">
         <div class="card-body">
             <h3>{{nome}}</h3>
@@ -14,9 +10,8 @@
             <br>
             <small>Criada em: {{publicado}}</small>
             <br>
-            <small>Categoria: {{categoria.nome}}</small>
         </div>
     </div>
 {{else}}
-    <h5>Sem postagens</h5>
+    <h5>No posts!</h5>
 {{/each}}
