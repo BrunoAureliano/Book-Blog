@@ -1,23 +1,32 @@
-<h2>Postagens Recentes</h2>
-{{#each livro}}
-    <div class="card mt-4">
-        <div class="card-body">
-            <h3>{{nome}}</h3>
-            <h6>Autor: {{autor}}</h6>
-            <a href="/user/{{_id}}">
-                <button class="btn btn-success">Ler Mais</button>
-            </a>
-            
-            <form action="/admin/resenhas/delete" method="post">
-                <input type="hidden" name="id" value="{{_id}}">
-                <button type="submit" class="btn btn-danger mt-2">Deletar</button>
-            </form>
-            
-            <small>Criada em: {{publicado}}</small>
-            <br>
-            <small>Categoria: {{categoria.nome}}</small>
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <div class="w-100" style="max-width: 700px;">
+            <h2 class="text-center mb-4">Postagens Recentes</h2>
+
+            {{#each livro}}
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">{{nome}}</h3>
+                        <h6 class="card-subtitle mb-2 text-muted">Autor: {{autor}}</h6>
+
+                        <p class="mb-2">
+                            <small class="text-muted">Criada em: {{publicado}}</small><br>
+                            <small class="text-muted">Categoria: {{categoria.nome}}</small>
+                        </p>
+
+                        <div class="d-flex gap-2">
+                            <a href="/user/resenha/{{_id}}" class="btn btn-primary">Ler Mais</a>
+
+                            <form action="/admin/resenhas/delete" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="{{_id}}">
+                                <button type="submit" class="btn btn-danger">Deletar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                <h5 class="text-center">Sem postagens</h5>
+            {{/each}}
         </div>
     </div>
-{{else}}
-    <h5>Sem postagens</h5>
-{{/each}}
+</body>

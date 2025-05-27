@@ -1,24 +1,33 @@
-<h2>List of Categories: </h2>
-<hr>
-<a href="/admin/categorias/add">
-    <button class="btn btn-success">Adicionar nova categoria</button>
-</a>
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <div class="w-100" style="max-width: 700px;">
+            <h2 class="text-center mb-4">Lista de Categorias</h2>
 
-{{#each categorias}}
-    <div class="card mt-4">
-        <div class="card-body">
-            <h4>{{nome}}</h4>
-            <small>Slug: {{slug}}</small>
-            <br>
-            <a href="/admin/categorias/edit/{{_id}}">
-                <button class="btn btn-success mt-3">Editar Categoria</button>
-            </a>
-            <form action="/admin/categorias/delete" method="post">
-                <input type="hidden" name="id" value="{{_id}}">
-                <button type="submit" class="btn btn-danger mt-2">Deletar</button>
-            </form>
+            <div class="d-flex justify-content-center mb-4">
+                <a href="/admin/categorias/add" class="btn btn-primary w-100" style="max-width: 500px;">
+                    Adicionar Nova Categoria
+                </a>
+            </div>
+
+            {{#each categorias}}
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h4 class="card-title">{{nome}}</h4>
+                        <small class="text-muted">Slug: {{slug}}</small>
+
+                        <div class="d-flex flex-column flex-md-row gap-2 mt-3">
+                            <a href="/admin/categorias/edit/{{_id}}" class="btn btn-outline-primary w-100">Editar Categoria</a>
+
+                            <form action="/admin/categorias/delete" method="post" class="w-100">
+                                <input type="hidden" name="id" value="{{_id}}">
+                                <button type="submit" class="btn btn-outline-danger w-100">Deletar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                <h4 class="mt-4">Nenhuma categoria cadastrada.</h4>
+            {{/each}}
         </div>
     </div>
-{{else}}
-    <h4 class="mt-4">No categories</h4>
-{{/each}}
+</body>

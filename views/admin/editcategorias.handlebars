@@ -1,16 +1,27 @@
-<h3>Editar Categoria</h3>
-<div class="card">
-    <div class="card-body">
-        <form action="/admin/categorias/edit" method="post">
-            <input type="hidden" name="id" value="{{categoria._id}}">
-            <label for="nome">Nome: </label>
-                <input type="text" id="name" name="nome" placeholder="Nome da Categoria" class="form-control" value="{{categoria.nome}}"> 
-            <label for="slug">Slug: </label>
-                <input type="text" id="slug" name="slug" placeholder="Slug da Categoria" class="form-control" value="{{categoria.slug}}"> 
-                <br>
-            <a href="/admin/categorias/edit/{{_id}}">
-                <button type="submit" class="btn btn-success">Editar Categoria</button>
-            </a>
-    </form>
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <div class="w-100" style="max-width: 500px;">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h3 class="text-center mb-4">Editar Categoria</h3>
+
+                    <form action="/admin/categorias/edit" method="post">
+                        <input type="hidden" name="id" value="{{categoria._id}}">
+
+                        <div class="form-group mb-3">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" id="nome" name="nome" placeholder="Nome da Categoria" class="form-control" value="{{categoria.nome}}" required>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label for="slug" class="form-label">Slug</label>
+                            <input type="text" id="slug" name="slug" placeholder="Slug da Categoria" class="form-control" value="{{categoria.slug}}" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Salvar Alterações</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</body>
