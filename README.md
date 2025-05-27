@@ -24,11 +24,14 @@ Para testar o projeto localmente, siga estas etapas:
 
    `npm install`
 
-4. Inicie o servidor local com o comando:
+4. Crie o arquivo .env e coloque sua variável de conexão com o banco de dados:
+'mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/<database>?retryWrites=true&w=majority'
+
+5. Inicie o servidor local com o comando:
 
    `node app.js`
 
-5. Abra um navegador web e digite o seguinte endereço na barra de endereços:
+6. Abra um navegador web e digite o seguinte endereço na barra de endereços:
 
    `http://localhost:8080`
 
@@ -36,4 +39,3 @@ Isso abrirá a interface web do projeto. Se o servidor estiver funcionando corre
 
 #### 📝 Observação
 Deve-se ter o node instalado na sua máquina
-
