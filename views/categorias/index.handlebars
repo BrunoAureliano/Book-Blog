@@ -1,9 +1,22 @@
-<h3>Categorias: </h3>
-<hr>
-{{#each categoria}}
-    <a href="categorias/{{slug}}">
-        <h5>{{nome}}</h5>
-    </a>
-{{else}}
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <div class="w-100" style="max-width: 700px;">
+            <div class="p-4 shadow rounded bg-white">
+                <h3 class="text-center mb-4">Categorias</h3>
+                <hr>
 
-{{/each}}
+                {{#each categoria}}
+                    <a href="categorias/{{slug}}" class="text-decoration-none">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title mb-0">{{nome}}</h5>
+                            </div>
+                        </div>
+                    </a>
+                {{else}}
+                        <h5>Nenhuma categoria encontrada.</h5>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</body>
