@@ -1,26 +1,42 @@
-<h3>Nova Postagem</h3>
-<div class="card">
-    <div class="card-body">
-        <form action="/user/addpostagem/new" method="post">
-        <input type="hidden" name="id" value="{{livro._id}}">
-        <label for="nome">Nome: </label>
-            <input type="text" id="nome" name="nome" placeholder="Nome do livro" class="form-control">
-        <label for="slug">Slug: </label>
-            <input type="text" id="slug" name="slug" placeholder="Slug do livro" class="form-control">
-        <label for="autor">Autor: </label>
-            <input type="text" id="autor" name="autor" placeholder="Autor do livro" class="form-control">
-        <label for="resenha">Escreva aqui sua resenha: </label> 
-            <textarea name="resenha" id="resenha" class="form-control"></textarea>
-        <label for="categoria">Categoria: </label>
-            <select name="categoria" id="categoria" class="form-control">
-                {{#each categorias}}
-                    <option value="{{_id}}">{{nome}}</option>
-                {{else}}
-                    <option value="0">Sem categoria registrada</option>
-                {{/each}}
-            </select>
-            <br>
-            <button class="btn btn-success">Criar Resenha</button>
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <form action="/user/addpostagem/new" method="post" class="p-4 shadow rounded bg-white w-100" style="max-width: 700px;">
+            <h3 class="text-center mb-4">Nova Postagem</h3>
+
+            <input type="hidden" name="id" value="{{livro._id}}">
+
+            <div class="form-group mb-3">
+                <label for="nome" class="form-label">Nome do livro</label>
+                <input type="text" id="nome" name="nome" placeholder="Nome do livro" class="form-control">
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="slug" class="form-label">Slug</label>
+                <input type="text" id="slug" name="slug" placeholder="Slug do livro" class="form-control">
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="autor" class="form-label">Autor</label>
+                <input type="text" id="autor" name="autor" placeholder="Autor do livro" class="form-control">
+            </div>
+
+            <div class="form-group mb-3">
+                <label for="resenha" class="form-label">Escreva aqui sua resenha</label>
+                <textarea name="resenha" id="resenha" class="form-control" rows="5"></textarea>
+            </div>
+
+            <div class="form-group mb-4">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select name="categoria" id="categoria" class="form-control">
+                    {{#each categorias}}
+                        <option value="{{_id}}">{{nome}}</option>
+                    {{else}}
+                        <option value="0">Sem categoria registrada</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">Criar Resenha</button>
         </form>
     </div>
-</div>
+</body>

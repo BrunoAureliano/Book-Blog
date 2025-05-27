@@ -1,9 +1,15 @@
-<div class="card">
-    <div class="card-body">
-        <h1>{{livro.nome}}</h1>
-        <hr>
-        <small>Data de publicação: {{livro.publicado}}</small>
-        <hr>
-        {{livro.resenha}}
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <div class="card shadow rounded w-100" style="max-width: 700px;">
+            <div class="card-body">
+                <h1 class="card-title text-center">{{livro.nome}}</h1>
+                <hr>
+                <p class="text-muted text-center">
+                    <small>Data de publicação: {{livro.publicado}}</small>
+                </p>
+                <hr>
+                <p class="card-text">{{livro.resenha}}</p>
+            </div>
+        </div>
     </div>
-</div>
+</body>

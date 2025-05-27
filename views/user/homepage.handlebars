@@ -1,22 +1,29 @@
-<a href="/user/addpostagem">
-    <button class="btn btn-success">Nova Postagem</button>
-</a>
+<body class="bg-light">
+    <div class="d-flex flex-column align-items-center justify-content-start min-vh-100 px-3 py-4 overflow-auto">
+        <div class="w-100" style="max-width: 700px;">
+            <h2 class="text-center mb-4">Postagens Recentes</h2>
 
-<h2>Postagens Recentes</h2>
-{{#each livro}}
-    <div class="card mt-4">
-        <div class="card-body">
-            <h3>{{nome}}</h3>
-            <h6>Autor: {{autor}}</h6>
-            <a href="/user/resenha/{{_id}}">
-                <button class="btn btn-success">Ler Mais</button>
-            </a>
-            <br>
-            <small>Criada em: {{publicado}}</small>
-            <br>
-            <small>Categoria: {{categoria.nome}}</small>
+            <div class="d-flex justify-content-center mb-4">
+                <a href="/user/addpostagem" class="btn btn-primary w-100" style="max-width: 500px;">
+                    Nova Postagem
+                </a>
+            </div>
+
+            {{#each livro}}
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-body">
+                        <h3 class="card-title">{{nome}}</h3>
+                        <h6 class="card-subtitle mb-2 text-muted">Autor: {{autor}}</h6>
+                        <p class="mb-2">
+                            <small class="text-muted">Criada em: {{publicado}}</small><br>
+                            <small class="text-muted">Categoria: {{categoria.nome}}</small>
+                        </p>
+                        <a href="/user/resenha/{{_id}}" class="btn btn-primary">Ler Mais</a>
+                    </div>
+                </div>
+            {{else}}
+                <h5>Sem postagens</h5>
+            {{/each}}
         </div>
     </div>
-{{else}}
-    <h5>Sem postagens</h5>
-{{/each}}
+</body>
