@@ -24,8 +24,9 @@ Para testar o projeto localmente, siga estas etapas:
 
    `npm install`
 
-4. Crie o arquivo .env e coloque sua variável de conexão com o banco de dados:
-'mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/<database>?retryWrites=true&w=majority'
+4. Crie o arquivo .env e coloque sua variável de conexão com o banco de dados [Atlas MongoDB]:
+
+   `MONGO_URI=mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/`
 
 5. Inicie o servidor local com o comando:
 
@@ -39,3 +40,18 @@ Isso abrirá a interface web do projeto. Se o servidor estiver funcionando corre
 
 #### 📝 Observação
 Deve-se ter o node instalado na sua máquina
+
+
+### Imagens da Aplicação
+
+![Página de Boas-Vindas](./public/img/boas-vindas.png)
+
+![Página Principal de Postagens](./public/img/homepage.png)
+
+![Página de Categorias](./public/img/categorias.png)
+
+![Página Principal de Admin](./public/img/homepage-admin.png)
+
+![Página de Controle de Categorias](./public/img/categorias-admin.png)
+
+![Página de 'Ler Mais'](./public/img/ler-mais.png)
