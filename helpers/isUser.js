@@ -1,3 +1,4 @@
+//Função de autenticação de usuário logado
 const logado = function(req, res, next) {
     if(req.isAuthenticated() && req.user) {
         return next()

@@ -7,6 +7,7 @@ import '../models/Usuarios.js'
 
 const Usuario = mongoose.model('usuarios')
 
+// Validação de login usando Passport
 export default function Passport(passport) {
 
     passport.use(new localStrategy({ usernameField: 'email', passwordField: 'senha' }, async (email, senha, done) => {
